@@ -1,0 +1,25 @@
+{
+  "name": "html-anchor-generator",
+  "version": "1.0.0",
+  "description": "Генератор HTML-якорей: сопоставление названий товаров в таблице с <product-card> и перенумерация ID (one, two, three, ...).",
+  "main": "script.js",
+  "scripts": {
+    "test": "node test/run-tests.js",
+    "test:e2e": "node test/e2e.js",
+    "test:edge": "node test/edge-tests.js",
+    "test:ui": "node test/ui-tests.js",
+    "test:variants": "node test/variants.js",
+    "test:all": "node test/run-tests.js && node test/e2e.js && node test/edge-tests.js && node test/ui-tests.js && node test/variants.js",
+    "repro": "node test/repro.js"
+  },
+  "keywords": [
+    "html",
+    "anchor",
+    "product-card",
+    "generator"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anchor Generator</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232b2b2b'%3E%3Cpath d='M21.75 12a9.75 9.75 0 0 1-9 9.69V22a.75.75 0 0 1-1.5 0v-.31a9.75 9.75 0 0 1-9-9.69.75.75 0 0 1 1.5 0 8.25 8.25 0 0 0 7.5 8.23V13.9a3 3 0 0 1 0-5.8V3.5a.75.75 0 0 1 1.5 0v4.6a3 3 0 0 1 0 5.8v6.83a8.25 8.25 0 0 0 7.5-8.23.75.75 0 0 1 1.5 0zM12 10.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Anchor Generator</h1>
+  </header>
+
+  <main class="app">
+    <section class="panel" aria-label="Исходный HTML">
+      <div class="panel-head">
+        <h2>Исходный HTML</h2>
+        <button type="button" id="clearBtn" class="btn">Очистить</button>
+      </div>
+      <div class="code-wrap">
+        <textarea id="input" class="code-area" spellcheck="false"
+          placeholder="Вставьте HTML-код сюда..."></textarea>
+      </div>
+      <div class="status" id="inputStatus" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" aria-label="Результат">
+      <div class="panel-head">
+        <h2>Результат</h2>
+        <button type="button" id="copyBtn" class="btn">Копировать результат</button>
+      </div>
+      <div class="code-wrap" id="outputWrap">
+        <pre id="outputHighlight" class="code-highlight" aria-hidden="true"></pre>
+        <textarea id="output" class="code-area" spellcheck="false" readonly
+          placeholder="Здесь появится обработанный HTML..."></textarea>
+      </div>
+      <div class="status" id="stats" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

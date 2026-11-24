@@ -1,0 +1,240 @@
+:root {
+  --bg: #ececec;
+  --panel: #f5f5f5;
+  --panel-border: #d6d6d6;
+  --field: #ffffff;
+  --field-border: #c9c9c9;
+  --text: #2b2b2b;
+  --muted: #6b6f74;
+  --accent: #8a8f94;
+  --accent-hover: #a3a8ad;
+  --hl-id: #0b7a8f;
+  --hl-id-bg: rgba(11, 122, 143, 0.10);
+  --radius: 8px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid var(--panel-border);
+  flex: 0 0 auto;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.app-header .subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- Layout ---------- */
+.app {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px 24px 24px;
+  min-height: 0;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex: 0 0 auto;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1;
+  color: #ffffff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid #b8bdc3;
+  outline-offset: 2px;
+}
+
+/* ---------- Code areas ---------- */
+.code-area {
+  flex: 1 1 auto;
+  min-height: 120px;
+  width: 100%;
+  resize: none;
+  border: 1px solid var(--field-border);
+  border-radius: 6px;
+  background: var(--field);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  padding: 12px;
+  tab-size: 2;
+  overflow: auto;
+}
+
+.code-area::placeholder {
+  color: #9aa0a6;
+  -webkit-text-fill-color: #9aa0a6;
+  opacity: 1;
+}
+
+.code-area:focus {
+  outline: none;
+  border-color: #a0a5aa;
+}
+
+/* ---------- Подсветка проставленных id (overlay поверх правого textarea) ---------- */
+.code-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 120px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* Белый фон поля держим на обёртке: textarea и overlay-слой прозрачны. */
+  background: var(--field);
+  border: 1px solid var(--field-border);
+  border-radius: 6px;
+}
+
+.code-highlight {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  tab-size: 2;
+  white-space: pre-wrap;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--text);
+  background: transparent;
+}
+
+/* Подсветка нового кода, добавленного генератором (янтарный). */
+.code-highlight .hl-changed {
+  color: #b45309;                    /* тёплый янтарный */
+  font-weight: 600;
+  background: rgba(180, 83, 9, 0.12);
+  border-radius: 3px;
+}
+
+/* Только правое поле использует overlay: его textarea прозрачен, текст
+   «рисует» .code-highlight, caret и выделение остаются видимыми.
+   Левое поле (ввод) — обычный textarea без overlay, поэтому остаётся
+   непрозрачным и наследует стандартные стили .code-area. */
+#outputWrap .code-area {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  /* Рамка и радиус поля заданы на .code-wrap — не дублируем их. */
+  border: none;
+  color: var(--text);
+  caret-color: var(--text);
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Status / stats ---------- */
+.status {
+  flex: 0 0 auto;
+  min-height: 18px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.status.error {
+  color: #c0392b;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    min-height: 40vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header,
+  .app {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .panel-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

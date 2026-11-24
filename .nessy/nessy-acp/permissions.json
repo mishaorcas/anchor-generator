@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "permissions": {
+    "allow": [
+      "write_to_file(test/ui-tests.js)",
+      "replace_in_file(test/edge-tests.js)",
+      "replace_in_file(test/ui-tests.js)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
